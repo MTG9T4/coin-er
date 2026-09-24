@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a0d0d" />
+    <meta name="description" content="Coin ER checks the recent trading pulse of any Solana token. Paste a mint, read the numbers, and share a receipt." />
+    <meta property="og:title" content="Coin ER — Is your coin still breathing?" />
+    <meta property="og:description" content="A shareable, live activity check for Solana tokens. No wallet needed." />
+    <meta property="og:image" content="https://mtg9t4.github.io/coin-er/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>Coin ER — Is your coin still breathing?</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="noise" aria-hidden="true"></div>
+    <header class="site-header wrap">
+      <a class="brand" href="./" aria-label="Coin ER home"><span class="brand-mark" aria-hidden="true">✚</span><span>COIN<span class="brand-accent">ER</span></span></a>
+      <div class="header-right"><span class="live-dot"></span><span>THE MEMECOIN EMERGENCY ROOM</span><span class="header-version">/ V1.0</span></div>
+    </header>
+
+    <main>
+      <section class="hero wrap">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span> WALK IN. NO APPOINTMENT.</p>
+          <h1>IS YOUR COIN<br /><em>STILL BREATHING?</em></h1>
+          <p class="hero-sub">Paste a Solana token address. Get its recent trading pulse, the hard numbers, and a receipt worth sharing.</p>
+          <form id="check-form" class="check-form" novalidate>
+            <label for="mint-input">SOLANA TOKEN MINT</label>
+            <div class="input-row">
+              <input id="mint-input" name="mint" type="text" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="Paste a token address…" aria-describedby="form-error" />
+              <button type="submit" id="check-button"><span>RUN CHECK</span><span aria-hidden="true">↗</span></button>
+            </div>
+            <p id="form-error" class="form-error" role="alert" hidden></p>
+          </form>
+          <div class="examples"><span>TRY A PATIENT:</span><button type="button" data-mint="CixxxgHdkpPSSKbVdCyj1NsQcL6shj8z93fZvPhipump">MINTFO ↗</button><button type="button" data-mint="2PENPmfgJfq6CG3k4byj4oWwHf8SerqakmYHMkUupump">FAMILIARS ↗</button></div>
+        </div>
+        <div class="hero-graphic" aria-hidden="true">
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+          <div class="graphic-core"><span class="cross">✚</span><svg viewBox="0 0 340 130" preserveAspectRatio="none"><path d="M0 65 H65 L78 65 L90 34 L104 103 L117 8 L132 65 H169 L182 65 L194 34 L208 103 L221 8 L236 65 H340" /></svg></div>
+          <div class="graphic-label graphic-label-one">CHECK THE PULSE_</div><div class="graphic-label graphic-label-two">NO HOPIUM. JUST DATA.</div>
+        </div>
+      </section>
+
+      <section id="result" class="result-section wrap" aria-live="polite" hidden>
+        <div class="section-rule"><span>01 / PATIENT REPORT</span><span id="last-updated">—</span></div>
+        <div class="report-top">
+          <div class="identity"><div class="coin-avatar" id="coin-avatar" aria-hidden="true">?</div><div><p class="mini-label">TOKEN UNDER OBSERVATION</p><h2 id="coin-name">—</h2><p class="coin-symbol" id="coin-symbol">—</p></div></div>
+          <div class="report-actions"><button class="icon-action" type="button" id="refresh-button" title="Refresh data">↻ <span>REFRESH</span></button><button class="icon-action" type="button" id="copy-link-button">↗ <span>COPY LINK</span></button></div>
+        </div>
+        <div class="report-grid">
+          <article class="monitor-card">
+            <div class="monitor-top"><span><i class="monitor-dot"></i> LIVE ACTIVITY MONITOR</span><span id="monitor-window">LAST 5 MINUTES</span></div>
+            <div class="monitor-main"><div class="pulse-readout"><span class="pulse-number" id="pulse-number">—</span><span class="pulse-unit">TRADES<br />/ 5 MIN</span></div><div class="wave-wrap"><svg id="wave-svg" viewBox="0 0 600 110" preserveAspectRatio="none" aria-hidden="true"><path id="wave-path" d="M0 55 H600" /></svg><div class="wave-sweep"></div></div></div>
+            <div class="monitor-bottom"><span id="pulse-status" class="status-pill">—</span><span id="pulse-caption">Checking recent trades…</span></div>
+          </article>
+          <article class="verdict-card"><p class="mini-label">THE TRIAGE NOTE</p><h3 id="triage-title">—</h3><p id="triage-copy">—</p><div class="verdict-foot"><span>MEASURED ACTIVITY, NOT A BUY SIGNAL.</span><span>✚</span></div></article>
+        </div>
+
+        <div class="vitals-head"><h3>THE VITALS</h3><span>DEX SCREENER DATA · REFRESHES EVERY 45 SEC</span></div>
+        <div class="vitals-grid">
+          <div class="vital"><span>5 MIN BUYS</span><strong id="buys-five">—</strong><small>RECENT BUY TRANSACTIONS</small></div>
+          <div class="vital"><span>5 MIN SELLS</span><strong id="sells-five">—</strong><small>RECENT SELL TRANSACTIONS</small></div>
+          <div class="vital"><span>1 HOUR VOLUME</span><strong id="volume-hour">—</strong><small>USD TRADED</small></div>
+          <div class="vital"><span>LIQUIDITY</span><strong id="liquidity">—</strong><small id="liquidity-note">USD IN TRACKED PAIR</small></div>
+          <div class="vital"><span>MARKET CAP</span><strong id="market-cap">—</strong><small>AS REPORTED BY SOURCE</small></div>
+          <div class="vital"><span>PAIR AGE</span><strong id="pair-age">—</strong><small>TIME SINCE PAIR CREATION</small></div>
+        </div>
+
+        <div class="activity-panel"><div class="activity-heading"><div><p class="mini-label">TRADE INTENSITY</p><h3>HOW LOUD IS THE ROOM?</h3></div><span>TRADES / MINUTE</span></div><div id="activity-bars" class="activity-bars"></div><p class="activity-note">Each bar is a window average, not a live chart. Short windows can change quickly.</p></div>
+
+        <div class="receipt-panel"><div><p class="mini-label">TAKE IT WITH YOU</p><h3>SHARE THE RECEIPT.</h3><p>Make the numbers the conversation. Every link opens a fresh check for the same token.</p></div><div class="receipt-actions"><button type="button" id="save-card-button" class="primary-action">SAVE PNG <span>↓</span></button><button type="button" id="share-button" class="secondary-action">SHARE <span>↗</span></button></div></div>
+        <div class="source-line"><span id="mint-address">—</span><div><a id="dex-link" href="#" target="_blank" rel="noopener noreferrer">VIEW PAIR ↗</a><a id="pump-link" href="#" target="_blank" rel="noopener noreferrer">PUMP PAGE ↗</a></div></div>
+      </section>
+
+      <section class="how-section wrap"><div class="section-rule"><span>02 / HOW IT WORKS</span><span>THREE STEPS. ZERO WALLET.</span></div><div class="how-grid"><div><span>01</span><h3>PASTE A MINT</h3><p>Use the full Solana token address so coins with the same name do not get mixed up.</p></div><div><span>02</span><h3>READ THE PULSE</h3><p>See recent trading activity, volume, liquidity and pair age from public market data.</p></div><div><span>03</span><h3>PASS IT ON</h3><p>Share a live link or a time stamped image. Anyone can check the same token.</p></div></div></section>
+    </main>
+    <footer class="site-footer wrap"><div class="brand"><span class="brand-mark">✚</span><span>COIN<span class="brand-accent">ER</span></span></div><p>Market activity is not token safety, investment advice, or a prediction. Data may lag or be incomplete.</p><a href="https://docs.dexscreener.com/api/reference" target="_blank" rel="noopener noreferrer">DATA SOURCE ↗</a></footer>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
