@@ -94,9 +94,10 @@ function safeUrl(value) {
 
 function renderBars(pair) {
   ui.bars.replaceChildren();
+  const pairAgeMinutes = num(pair.pairCreatedAt) === null ? null : Math.max(1, (Date.now() - pair.pairCreatedAt) / 60_000);
   const windows = [
     ['5 MIN', 5, pair.txns?.m5], ['1 HOUR', 60, pair.txns?.h1], ['24 HOUR', 1_440, pair.txns?.h24]
-  ].map(([label, minutes, txns]) => ({label, perMinute: (count(txns?.buys) + count(txns?.sells)) / minutes}));
+  ].map(([label, minutes, txns]) => ({label, perMinute: (count(txns?.buys) + count(txns?.sells)) / (pairAgeMinutes === null ? minutes : Math.min(minutes, pairAgeMinutes))}));
   const max = Math.max(...windows.map((item) => item.perMinute), .01);
   for (const item of windows) {
     const row = document.createElement('div'); row.className = 'activity-row';
