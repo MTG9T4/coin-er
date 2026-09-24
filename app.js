@@ -152,8 +152,9 @@ async function checkMint(mint, {scroll = false} = {}) {
     const pair = choosePair(pairs, mint);
     if (!pair) throw new Error('No tracked Solana pair was found for that mint. Check the address or try a different token.');
     if (request.signal.aborted) return;
+    const syncInput = scroll || !ui.input.value.trim() || ui.input.value === mint;
     activeMint = mint;
-    ui.input.value = mint;
+    if (syncInput) ui.input.value = mint;
     window.history.replaceState(null, '', `?mint=${encodeURIComponent(mint)}`);
     render(pair, mint);
     if (scroll) ui.result.scrollIntoView({behavior: 'smooth', block: 'start'});
