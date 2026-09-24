@@ -2,6 +2,8 @@
 
 Coin ER is a small, shareable activity check for Solana tokens. Paste a mint or Pump.fun coin URL to see recent buys and sells, trade intensity, volume, liquidity, market cap and pair age. Save a time stamped PNG or share a link that rechecks live data.
 
+**Live site:** https://mtg9t4.github.io/coin-er/
+
 ## Run
 
 From this directory: `python3 -m http.server 4181`, then open `http://localhost:4181/`.
@@ -19,3 +21,5 @@ There is no build step or wallet connection. The static site fetches [DEX Screen
 ## Launch approach
 
 Share the site first. Test whether traders actually share receipts and return to check tokens. If that happens, consider a separate community token plan. The app itself has no token requirement and no token is launched here.
+
+The square project icon is at [`brand/coin-er-icon.png`](brand/coin-er-icon.png). A token name or ticker is intentionally not represented as launched or reserved.
